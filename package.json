@@ -1,0 +1,15 @@
+{
+  "name": "linkbot",
+  "version": "1.0.0",
+  "description": "Gives you saved links",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cody Robinson",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/client": "^3.9.0",
+    "mongodb": "^2.2.25"
+  }
+}
