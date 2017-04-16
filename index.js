@@ -4,6 +4,10 @@ var RtmClient = require('@slack/client').RtmClient;
 var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var bot_token = process.env.SLACK_BOT_TOKEN || '';
 
+// for herkoku to bind to.
+var express = require('express')
+var app = express()
+
 //var config = require('./config.js');
 
 //var rtm = new RtmClient(config.apiKey);
@@ -126,3 +130,13 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
 
 rtm.start();
 console.log('link bot started')
+
+
+app.set('port', (process.env.PORT || 5000));
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
+});
