@@ -8,3 +8,9 @@ Serves you up some links in slack
 `@linkbot link all`
 
 `@linkbot remove link google`
+
+
+Notes:
+- Requires mongodb
+- install via `npm install`
+- run via `node index.js`
