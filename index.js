@@ -13,7 +13,6 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
     // --- GET LINK ---
     if (message.text.toLowerCase().includes('link me ')) {
       var link = message.text.toLowerCase().split('link me ')[1];
-      console.log(`looking for ${link}`);
 
       dbHelper.get(link, function(result) {
         if (!result) {
@@ -32,6 +31,26 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
       });
 
       return;
+    }
+
+    // --- GET ALL LINKS ---
+    if (message.text.toLowerCase().includes('link all')) {
+      dbHelper.getAll(function(links) {
+        if (links.error) {
+          rtm.sendMessage(`<@${message.user}>, error getting all links`, message.channel);
+          return;
+        }
+
+        var ret = '```';
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+
+          ret += `${link.key}: ${link.link} \n`;
+        }
+        ret += '```';
+
+        rtm.sendMessage(`<@${message.user}>, ${ret}`, message.channel);
+      })
     }
 
     // --- SAVE LINK ---
