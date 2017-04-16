@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-var config = require('./config.js');
+//var config = require('./config.js');
 
 // Connection URL
 //var url = config.url;

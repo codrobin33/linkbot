@@ -4,7 +4,7 @@ var RtmClient = require('@slack/client').RtmClient;
 var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var bot_token = process.env.SLACK_BOT_TOKEN || '';
 
-var config = require('./config.js');
+//var config = require('./config.js');
 
 //var rtm = new RtmClient(config.apiKey);
 var rtm = new RtmClient(process.env.APIKEY);
