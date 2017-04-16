@@ -4,7 +4,8 @@ var MongoClient = require('mongodb').MongoClient
 var config = require('./config.js');
 
 // Connection URL
-var url = config.url;
+//var url = config.url;
+var url = process.env.URL;
 
 var insertLink = function(key, link, callback) {
   // connec to db

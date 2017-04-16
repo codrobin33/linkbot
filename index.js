@@ -6,7 +6,8 @@ var bot_token = process.env.SLACK_BOT_TOKEN || '';
 
 var config = require('./config.js');
 
-var rtm = new RtmClient(config.apiKey);
+//var rtm = new RtmClient(config.apiKey);
+var rtm = new RtmClient(process.env.APIKEY);
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   if (message.text && message.text.includes(`<@${rtm.activeUserId}>`)) {
