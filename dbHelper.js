@@ -9,7 +9,6 @@ var url = config.url;
 var insertLink = function(key, link, callback) {
   // connec to db
   MongoClient.connect(url, function(err, db) {
-    //assert.equal(null, err);
     if (err) {
       db.close();
       callback({error:'error connecting to db.'});

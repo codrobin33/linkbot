@@ -10,6 +10,22 @@ var rtm = new RtmClient(config.apiKey);
 
 rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   if (message.text && message.text.includes(`<@${rtm.activeUserId}>`)) {
+    // --- HELP ME ---
+    if (message.text.toLowerCase().includes('help')) {
+      var ret = '```' +
+        'Avaliable commands are: \n' +
+        'link me {key} \n' +
+        'link all \n' +
+        'save/add link {key} {link} \n' +
+        'remove link {key} \n\n' +
+
+        'Example: \n' +
+        '@linkbot save link google https://google.com \n' +
+      '```';
+
+      rtm.sendMessage(`<@${message.user}>, ${ret}`, message.channel);
+    }
+
     // --- GET LINK ---
     if (message.text.toLowerCase().includes('link me ')) {
       var link = message.text.toLowerCase().split('link me ')[1];
@@ -54,8 +70,13 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
     }
 
     // --- SAVE LINK ---
-    if (message.text.toLowerCase().includes('save link ')) {
-      var keyAndLink = message.text.toLowerCase().split('save link ')[1];
+    if (message.text.toLowerCase().includes('save link ') || message.text.toLowerCase().includes('add link ')) {
+      var keyAndLink;
+      if (message.text.toLowerCase().includes('save link ')) {
+        keyAndLink = message.text.toLowerCase().split('save link ')[1];
+      } else {
+        keyAndLink = message.text.toLowerCase().split('add link ')[1];
+      }
 
       var parts = keyAndLink.split(' ');
 
@@ -103,3 +124,4 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
 });
 
 rtm.start();
+console.log('link bot started')
