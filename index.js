@@ -1,3 +1,4 @@
+require('newrelic');
 var dbHelper = require('./dbHelper.js');
 
 var RtmClient = require('@slack/client').RtmClient;
@@ -6,7 +7,7 @@ var bot_token = process.env.SLACK_BOT_TOKEN || '';
 
 // for herkoku to bind to.
 var express = require('express')
-var app = express()
+var app = express();
 
 //var config = require('./config.js');
 
