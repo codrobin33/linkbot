@@ -84,21 +84,28 @@ var getLink = function(key, callback) {
 
     // Get the documents collection
     var collection = db.collection('links');
-    // Find some documents
-    collection.findOne({key: key}, function(err, link) {
+
+    collection.find({key: key}).toArray(function(err, links) {
       if (err) {
         db.close();
         callback({error:'error finding link.'});
         return;
       }
-      if (!link) {
+      if (!links) {
         db.close();
         callback({error:`${key} does not exist`});
         return;
       }
 
-      db.close();
-      callback(link);
+      if (links.length > 0) {
+        // found multiple things. only return the one that is exact.
+        var link = links.filter(function(l) {
+          return l.key === key;
+        })[0];
+
+        db.close();
+        callback(link);
+      }
     });
   })
 }
