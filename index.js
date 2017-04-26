@@ -45,6 +45,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
           return;
         }
 
+        console.log('debug')
         if (result && typeof result.link !== 'undefined') {
           rtm.sendMessage(`<@${message.user}>, ${result.link}`, message.channel);
         } else {
