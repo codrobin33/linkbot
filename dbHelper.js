@@ -105,6 +105,9 @@ var getLink = function(key, callback) {
 
         db.close();
         callback(link);
+      } else {
+        db.close();
+        callback({error:`${key} does not exist`});
       }
     });
   })
