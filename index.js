@@ -41,7 +41,6 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
       console.log('getting link: ', link);
 
       dbHelper.get(link, function(result) {
-        console.log('debug0', result)
         if (!result) {
           rtm.sendMessage(`<@${message.user}>, error: could not find link`, message.channel);
           return;
@@ -50,7 +49,6 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
           return;
         }
 
-        console.log('debug')
         if (result && typeof result.link !== 'undefined') {
           rtm.sendMessage(`<@${message.user}>, ${result.link}`, message.channel);
         } else {
