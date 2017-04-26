@@ -32,11 +32,16 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
       rtm.sendMessage(`<@${message.user}>, ${ret}`, message.channel);
     }
 
+
+
     // --- GET LINK ---
     if (message.text.toLowerCase().includes('link me ')) {
       var link = message.text.toLowerCase().split('link me ')[1];
 
+      console.log('getting link: ', link);
+
       dbHelper.get(link, function(result) {
+        console.log('debug0', result)
         if (!result) {
           rtm.sendMessage(`<@${message.user}>, error: could not find link`, message.channel);
           return;
